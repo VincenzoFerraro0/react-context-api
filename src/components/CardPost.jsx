@@ -1,4 +1,4 @@
-export default function PostCard({ id, title, content, tags, url }) {
+export default function CardPost({ id, title, content, tags, url }) {
     return (
         <div key={id} className="bg-white md:p-6 rounded-lg shadow-md hover:shadow-xl transition-all max-w-md mx-auto">
              {/* Titolo del post */}

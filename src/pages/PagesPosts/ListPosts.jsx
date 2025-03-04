@@ -1,27 +1,19 @@
 // Importa gli hook di React per gestire lo stato e gli effetti collaterali
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-// Importa Axios per effettuare richieste HTTP
-import axios from "axios";
+
 
 // Importa NavLink per creare link di navigazione dinamici
 import { Link } from 'react-router-dom';
 
 // Importa il componente PostCard per visualizzare ogni post
-import PostCard from "../../components/PostCard";
+import CardPost from "../../components/CardPost";
 
-export default function Posts() {
-    // Stato per memorizzare la lista dei post
-    const [posts, setPosts] = useState([]);
-
-    // URL dell'API definito nelle variabili d'ambiente
-    const url = import.meta.env.VITE_ENDPOINT_URL;
+export default function ListPosts() {
 
     // Effettua una richiesta HTTP all'API quando il componente viene montato
     useEffect(() => {
-        axios.get(url)
-            .then((res) => setPosts(res.data)) // Salva i dati ricevuti nello stato `posts`
-            .catch(err => console.error(err))
+
     }, []); // Il secondo parametro `[]` assicura che la chiamata venga eseguita solo una volta
 
     return (
@@ -39,7 +31,7 @@ export default function Posts() {
                                 >
                                     {/* Link al singolo post usando il suo ID */}
                                     <Link to={`/posts/${id}`}>
-                                        <PostCard
+                                        <CardPost
                                             title={title}
                                             content={content}
                                             tags={tags}
