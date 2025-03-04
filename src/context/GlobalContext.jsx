@@ -1,7 +1,7 @@
 import { createContext, useState, useContext } from 'react';
+
 // Importa axios per effettuare la richiesta HTTP all'API
 import axios from "axios";
-
 
 const GlobalContext = createContext();
 

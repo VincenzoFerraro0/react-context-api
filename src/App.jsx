@@ -10,23 +10,26 @@ import SinglePost from './pages/PagesPosts/SinglePost';
 // Layout predefinito da usare in tutta l'app
 import DefaultLayout from './layout/DefaultLayout';
 
+// Context
+import { GlobalProvider } from './context/GlobalContext';
+
 function App() {
   return (
-    <>
+    <GlobalProvider>
       {/* Il BrowserRouter è il componente che gestisce la navigazione del router */}
       <BrowserRouter>
         <Routes>
           {/* Definisce una route che utilizza il layout predefinito */}
-          <Route Component={ DefaultLayout }>
+          <Route Component={DefaultLayout}>
             {/* Definisce le rotte specifiche per le pagine */}
-            <Route path="/" Component={ HomePage } />               {/* Home Page */}
-            <Route path="/about-us" Component={ AboutUs } />         {/* Pagina Chi Siamo */}
-            <Route path="/posts" Component={ ListPosts } />              {/* Lista dei Post */}
-            <Route path="/posts/:id" Component={ SinglePost } />     {/* Pagina Singolo Post */}
+            <Route path="/" Component={HomePage} />               {/* Home Page */}
+            <Route path="/about-us" Component={AboutUs} />         {/* Pagina Chi Siamo */}
+            <Route path="/posts" Component={ListPosts} />          {/* Lista dei Post */}
+            <Route path="/posts/:id" Component={SinglePost} />     {/* Pagina Singolo Post */}
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </GlobalProvider>
   );
 }
 
