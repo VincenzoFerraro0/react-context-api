@@ -1,19 +1,20 @@
 // Importa gli hook di React per gestire lo stato e gli effetti collaterali
 import { useEffect } from "react";
 
-
-
 // Importa NavLink per creare link di navigazione dinamici
 import { Link } from 'react-router-dom';
+
+import { useGlobalContext } from "../../context/GlobalContext";
 
 // Importa il componente PostCard per visualizzare ogni post
 import CardPost from "../../components/CardPost";
 
 export default function ListPosts() {
 
+    const {posts, fetchData} = useGlobalContext();
     // Effettua una richiesta HTTP all'API quando il componente viene montato
     useEffect(() => {
-
+        fetchData();
     }, []); // Il secondo parametro `[]` assicura che la chiamata venga eseguita solo una volta
 
     return (
