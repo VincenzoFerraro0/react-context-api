@@ -1,28 +1,29 @@
-// Importa gli hook di React per gestire stato ed effetti collaterali
+// Importa gli hook di React 
 import { useEffect } from "react";
 
 // Importa `useParams` per ottenere i parametri dell'URL (come l'ID del post)
 import { useParams } from "react-router-dom";
 
-
 // Importa il componente PostCard per visualizzare il singolo post
 import CardPost from "../../components/CardPost";
 
-
+import { useGlobalContext } from "../../context/GlobalContext";
 export default function SinglePost() {
+
+    const { singlePost, getPostId } = useGlobalContext();
     // Ottieni l'ID del post dalla URL usando `useParams`
     const { id } = useParams();
 
-    // Effettua una richiesta HTTP per ottenere il post specifico usando l'ID
+    // Recupera i dati del post quando cambia l'ID
     useEffect(() => {
-
-    }, [id, url]); // La chiamata verrà fatta ogni volta che l'ID o l'URL cambiano
+        getPostId(id)
+    }, [id]);
 
     return (
 
         <div className="bg-gray-50 p-6 min-h-screen transition-all">
             <div className="container mx-auto " >
-                {/* Se il post è stato caricato, visualizzalo usando PostCard */}
+                 {/* Controlla se il post è stato caricato prima di renderizzarlo */}
                 {singlePost &&
                     <CardPost
                         id={singlePost.id}

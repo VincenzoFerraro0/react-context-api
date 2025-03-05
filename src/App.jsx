@@ -1,31 +1,36 @@
-// Importa le componenti necessari da React Router per gestire la navigazione
+// Importazione delle librerie necessarie per la gestione della navigazione e dei componenti
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Pagine da importare
+// Importazione delle pagine e dei componenti necessari
 import HomePage from './pages/HomePage';
 import AboutUs from './pages/AboutUs';
 import ListPosts from './pages/PagesPosts/ListPosts';
 import SinglePost from './pages/PagesPosts/SinglePost';
 
-// Layout predefinito da usare in tutta l'app
+// Importazione del layout di default
 import DefaultLayout from './layout/DefaultLayout';
 
-// Context
+// Importazione del GlobalContext per la gestione dello stato globale
 import { GlobalProvider } from './context/GlobalContext';
 
 function App() {
   return (
+    // Provider globale che avvolge tutta l'applicazione per gestire lo stato globale
     <GlobalProvider>
-      {/* Il BrowserRouter è il componente che gestisce la navigazione del router */}
+      
+      {/* Router per gestire la navigazione tra le pagine */}
       <BrowserRouter>
         <Routes>
-          {/* Definisce una route che utilizza il layout predefinito */}
+          {/* Definizione della route principale con layout predefinito */}
           <Route Component={DefaultLayout}>
-            {/* Definisce le rotte specifiche per le pagine */}
-            <Route path="/" Component={HomePage} />               {/* Home Page */}
-            <Route path="/about-us" Component={AboutUs} />         {/* Pagina Chi Siamo */}
-            <Route path="/posts" Component={ListPosts} />          {/* Lista dei Post */}
-            <Route path="/posts/:id" Component={SinglePost} />     {/* Pagina Singolo Post */}
+            {/* Route per la Home Page */}
+            <Route path="/" Component={HomePage} />              
+            {/* Route per la pagina "About Us" */}
+            <Route path="/about-us" Component={AboutUs} />        
+            {/* Route per la lista dei post */}
+            <Route path="/posts" Component={ListPosts} />        
+            {/* Route per la visualizzazione di un singolo post, con parametro id */}
+            <Route path="/posts/:id" Component={SinglePost} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -33,4 +38,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

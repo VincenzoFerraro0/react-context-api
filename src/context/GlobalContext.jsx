@@ -1,59 +1,51 @@
 import { createContext, useState, useContext } from 'react';
-
-// Importa axios per effettuare la richiesta HTTP all'API
 import axios from "axios";
 
+// Creazione del contesto globale
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-
-
-    // Stato per memorizzare la lista dei post
+    // Stato per memorizzare tutti i post
     const [posts, setPosts] = useState([]);
-
-    // Stato per memorizzare i dettagli del post
+    // Stato per memorizzare un singolo post selezionato
     const [singlePost, singleSetPost] = useState(null);
-
-
-    // URL dell'API definito nelle variabili d'ambiente
+    
+    // URL dell'API (proveniente dall'ambiente di sviluppo)
     const url = import.meta.env.VITE_ENDPOINT_URL;
-
-    //chimate api
-    //chimata per ottenere tutti i posts
+    
+    // Funzione per recuperare tutti i post
     const fetchData = () => {
         axios.get(url)
-            .then((res) => setPosts(res.data)) // Salva i dati ricevuti nello stato `posts`
-            .catch(err => console.error(err))
+            .then((res) => setPosts(res.data)) // Aggiorna lo stato con i dati ricevuti
+            .catch(err => console.error(err)); // Gestisce eventuali errori
     };
-
-
-    //chimata api per i singoli post
+    
+    // Funzione per ottenere i dettagli di un singolo post tramite ID
     const getPostId = (id) => {
-        // Quando l'ID cambia, esegui la richiesta per ottenere il post
         axios.get(`${url}/${id}`)
             .then((res) => {
-                // Memorizza il post ricevuto nello stato
                 singleSetPost(res.data);
-            });
+            })
+            .catch(err => console.error(err)); // Gestisce eventuali errori
     };
-
-
+    
+    // Valori condivisi nel contesto globale
     const value = {
         posts,
         singlePost,
         fetchData,
         getPostId
-    }
-
+    };
 
     return (
         <GlobalContext.Provider value={value}>
             {children}
         </GlobalContext.Provider>
-    )
-
+    );
 };
 
+// Hook personalizzato per accedere al contesto globale in altri componenti
 const useGlobalContext = () => useContext(GlobalContext);
 
+// Esportazione del GlobalProvider e del custom hook per l'uso nei componenti
 export { GlobalProvider, useGlobalContext };
